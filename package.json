@@ -1,0 +1,27 @@
+{
+  "name": "js-blackjack",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexMFV/Js-Blackjack.git"
+  },
+  "author": "AlexMFV",
+  "license": "GNU",
+  "bugs": {
+    "url": "https://github.com/AlexMFV/Js-Blackjack/issues"
+  },
+  "homepage": "https://github.com/AlexMFV/Js-Blackjack#readme",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.2",
+    "pg": "^7.15.1"
+  }
+}
