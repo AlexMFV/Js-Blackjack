@@ -1,3 +1,9 @@
+function updateCanvas(){
+  canvas.width = document.body.clientWidth;
+  canvas.height = document.body.clientHeight;
+  seatOffset = canvas.width * 0.1;
+}
+
 function DrawLine(x1, y1, x2, y2){
   ctx.moveTo(x1, y1);
   ctx.lineTo(x2, y2);
@@ -9,6 +15,7 @@ function DrawText(text, x, y, size, color){
   var textFont = (size + "px Verdana");
   ctx.font = textFont;
   ctx.strokeStyle = color;
+  ctx.fillStyle = color;
   ctx.fillText(text, x, y);
 }
 
@@ -27,8 +34,8 @@ function DrawBackground(){
 }
 
 function DrawPlayerSeats(){
-  let spacingX = canvas.width / playerCount;
-  for(let i = 1; i <= playerCount-1; i++){
-      DrawPlayerSeat(spacingX*i, 600, "Alex");
+  let spacingX = (canvas.width - seatOffset) / playerCount;
+  for(let i = 0; i < playerCount; i++){
+      DrawPlayerSeat(35 + (seatOffset) + (spacingX*i), 600, "Alex");
   }
 }

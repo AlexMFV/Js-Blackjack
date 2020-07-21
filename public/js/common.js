@@ -4,8 +4,7 @@ var ctx = canvas.getContext("2d");
 var background = new Image();
 
 //Auxiliary Variables
-var newX = 20;
-var newY = 20;
+var seatOffset;
 
 //Game Variables
 let fps = 30;
