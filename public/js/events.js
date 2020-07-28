@@ -8,6 +8,7 @@ window.onload = () => {
 };
 
 window.onresize = () => {
+  console.log(cardWidth, cardHeight);
   window.requestAnimationFrame(updateCanvas);
 }
 
