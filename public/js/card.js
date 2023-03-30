@@ -57,7 +57,7 @@ class Card{
 
     if(this.shown){
       ctx.drawImage(typeToUse, this.posX, this.posY, cardWidth, cardHeight);
-      DrawText(numberToUse, this.posX+10, this.posY+30, 30, colorToUse);
+      DrawText(numberToUse, this.posX+20, this.posY+22, 30, colorToUse);
     }
     else{
       ctx.drawImage(cardBack, this.posX, this.posY, cardWidth, cardHeight);

@@ -12,6 +12,8 @@ cardBack.src = "/resources/back_face.png";
 
 var cards = [];
 var playedCards = [];
+var buttons = [];
+var mousePos;
 
 function update(){
   ClearScreen();
@@ -20,8 +22,12 @@ function update(){
 
 function draw(){
   DrawBackground();
+  DrawButtons();
   DrawPlayerSeats();
   DrawCards();
+
+  CheckButtonHover();
+  drawButtonsOnCanvas();
   //drawTestCards();
 }
 
@@ -31,10 +37,27 @@ function DrawCards(){
   });
 }
 
-window.onclick = (e) => {
-  if(randomNumber(0,2) == 0)
-    cards.push(new Card(true, e.clientX, e.clientY));
-  else {
-    cards.push(new Card(false, e.clientX, e.clientY));
-  }
+function DrawButtons(){
+  buttons.forEach(btn => {
+    btn.draw();
+  });
 }
+
+function CheckButtonHover(){
+  buttons.forEach(button => {
+    if((mousePos.x >= button.x && mousePos.x <= (button.x+button.w)) &&
+    (mousePos.y >= button.y && mousePos.y <= (button.y+button.h)))
+    {
+      button.changeHover(true);
+      return;
+    }
+    button.changeHover(false);
+  });
+}
+
+window.onclick = (e) => {
+  checkbuttonpress(e);
+}
+
+//Update buttons positions based on screen size
+function updatePositions
