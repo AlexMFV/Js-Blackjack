@@ -33,9 +33,32 @@ function DrawBackground(){
   ctx.drawImage(background,0,0, canvas.width, canvas.height);
 }
 
-function DrawPlayerSeats(){
-  let spacingX = (canvas.width - seatOffset) / playerCount;
-  for(let i = 0; i < playerCount; i++){
-      DrawPlayerSeat(35 + (seatOffset) + (spacingX*i), 600, "Alex");
+function DrawPlayerSeats() {
+  const centerX = canvas.width / 2;
+  const centerY = 0;
+  const radius = Math.min(canvas.width, canvas.height) * -.65;
+  const startAngle = Math.PI * 1.1;
+  const endAngle = Math.PI * 1.9;
+  const angleStep = (endAngle - startAngle) / (playerCount - 1);
+
+  for (let i = 0; i < playerCount; i++) {
+    const angle = startAngle + angleStep * i;
+    const x = centerX + radius * Math.cos(angle) - 25; // 25 = half seat width
+    const y = centerY + radius * Math.sin(angle) - 35; // 35 = half seat height
+    DrawPlayerSeat(x, y, "Alex");
   }
+}
+
+function DrawDealerTable() {
+  const centerX = canvas.width / 2;
+  const centerY = 100;
+  const radius = Math.min(canvas.width, canvas.height) * 0.7;
+
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius, 0, Math.PI * 1);
+  ctx.fill();
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 2;
+  ctx.stroke();
 }

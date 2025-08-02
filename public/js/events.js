@@ -17,8 +17,6 @@ window.onresize = () => {
 
 // Make sure the image is loaded first otherwise nothing will draw.
 background.onload = function(){
-    DrawBackground();
-    DrawPlayerSeats();
     return setInterval(update, 1000 / fps);
 }
 
@@ -56,7 +54,7 @@ function checkbuttonpress(e){
     if((mousePos.x >= button.x && mousePos.x <= (button.x+button.w)) &&
     (mousePos.y >= button.y && mousePos.y <= (button.y+button.h)))
     {
-      console.log("Button Pressed: " + button.text);
+      
       return;
     }
   });

@@ -15,20 +15,25 @@ var playedCards = [];
 var buttons = [];
 var mousePos;
 
+window.gameState = "menu"; // Possible states: menu, host, join
+
 function update(){
   ClearScreen();
   window.requestAnimationFrame(draw);
 }
 
 function draw(){
-  DrawBackground();
-  DrawButtons();
-  DrawPlayerSeats();
-  DrawCards();
+  ClearScreen();
+
+  if (window.gameState === "menu") {
+    DrawMenu();
+  } else if (window.gameState === "host") {
+    DrawHostGame();
+  } else if (window.gameState === "join") {
+    DrawJoinGame();
+  }
 
   CheckButtonHover();
-  drawButtonsOnCanvas();
-  //drawTestCards();
 }
 
 function DrawCards(){
@@ -55,9 +60,74 @@ function CheckButtonHover(){
   });
 }
 
+function DrawMenu() {
+  // Draw menu background and buttons
+  DrawBackground();
+  const canvas = document.getElementById("gameCanvas");
+  const canvasWidth = canvas.width;
+  const canvasHeight = canvas.height;
+
+  // Draw game title
+  DrawTextWithStyle("Blackjack Multiplayer", canvasWidth / 2, canvasHeight * 0.4, "40px Arial", "#FFD700", "center");
+
+  buttons = [
+    { x: canvasWidth / 2 - 100, y: canvasHeight * 0.6, w: 200, h: 50, text: "Host Game", onClick: () => window.gameState = "host" },
+    { x: canvasWidth / 2 - 100, y: canvasHeight * 0.6 + 70, w: 200, h: 50, text: "Join Game", onClick: () => window.gameState = "join" }
+  ];
+  buttons = buttons.map(button => ({
+    ...button,
+    changeHover: function(isHovered) {
+      this.isHovered = isHovered;
+      // Add any additional hover behavior here
+    }
+  }));
+  buttons.forEach(button => {
+    DrawButton(button);
+  });
+}
+
+function DrawHostGame() {
+  // Placeholder for host game screen
+  console.log("Hosting game...");
+  DrawText("Hosting Game...", screen.width / 2, screen.height / 2);
+}
+
+function DrawJoinGame() {
+  // Placeholder for join game screen
+  console.log("Joining game...");
+  DrawText("Joining Game...", 100, 100);
+}
+
+function DrawButton(button) {
+  // Draw a button with text
+  DrawRectangle(button.x, button.y, button.w, button.h, "#ccc");
+  DrawTextWithStyle(button.text, button.x + 100 , button.y + 30, "20px Arial", "#000", "center");
+}
+
+function DrawRectangle(x, y, w, h, color) {
+  const canvas = document.getElementById("gameCanvas"); // Ensure your canvas has this ID
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = color;
+  ctx.fillRect(x, y, w, h);
+}
+
+function DrawText(text, x, y) {
+  const canvas = document.getElementById("gameCanvas"); // Ensure your canvas has this ID
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#000"; // Set text color
+  ctx.font = "20px Arial"; // Set font size and style
+  ctx.fillText(text, x, y);
+}
+
+function DrawTextWithStyle(text, x, y, font, color, align) {
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = color;
+  ctx.font = font;
+  ctx.textAlign = align;
+  ctx.fillText(text, x, y);
+}
+
 window.onclick = (e) => {
   checkbuttonpress(e);
 }
-
-//Update buttons positions based on screen size
-function updatePositions
